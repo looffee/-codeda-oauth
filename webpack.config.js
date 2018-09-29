@@ -13,7 +13,7 @@ module.exports = {
     ]
   },
   entry: {
-    main: './src/oauth.module.ts'
+    main: './src/index.ts'
   },
   output: {
     filename: 'index.js',
@@ -31,8 +31,12 @@ module.exports = {
   },
   externals: [
     '@angular/core',
+    '@angular/router',
     'rxjs',
     'zone.js',
     'typescript'
-  ]
+  ],
+  resolve: {
+    extensions: ['.ts']
+  }
 };

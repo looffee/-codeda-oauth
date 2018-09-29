@@ -3,15 +3,27 @@ import {
   ModuleWithProviders
 } from '@angular/core';
 
-@NgModule({
+import { OAuthGuard } from './oauth.guard';
+import { OAuthService } from './oauth.service';
+import {
+  Config,
+  CONFIG
+} from './congif';
 
-})
+@NgModule({})
 export class OAuthModule {
 
-  static forRoot(): ModuleWithProviders {
+  static forRoot(config: Config): ModuleWithProviders {
     return {
       ngModule: OAuthModule,
-      providers: []
+      providers: [
+        {
+          provide: CONFIG,
+          useValue: config
+        },
+        OAuthGuard,
+        OAuthService
+      ]
     };
   }
 
