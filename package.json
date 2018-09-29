@@ -1,0 +1,38 @@
+{
+  "name": "@codeda/oauth",
+  "version": "0.0.1",
+  "description": "Angular module for social authorizations",
+  "module": "dist/index.js",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "webpack"
+  },
+  "engines": {
+    "node": ">= 6.9.0",
+    "npm": ">= 3.0.0"
+  },
+  "peerDependencies": {
+    "@angular/core": "^>=6.0.0 <7.0.0",
+    "rxjs": ">=6.0.0 <7.0.0",
+    "typescript": ">=2.7.0 <=2.9.1",
+    "zone.js": ">=0.8.0 <1.0.0"
+  },
+  "keywords": [
+    "social",
+    "auth",
+    "oauth",
+    "angular"
+  ],
+  "author": "Ivan Gemba",
+  "license": "ISC",
+  "devDependencies": {
+    "@angular/core": "^6.1.9",
+    "rxjs": "^6.3.3",
+    "ts-loader": "^5.2.1",
+    "typescript": "^3.1.1",
+    "uglifyjs-webpack-plugin": "^2.0.1",
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.2",
+    "zone.js": "^0.8.26"
+  }
+}
