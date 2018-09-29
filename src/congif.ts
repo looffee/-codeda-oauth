@@ -2,13 +2,13 @@ import { InjectionToken } from '@angular/core';
 
 export interface Config {
 
-  google: {
+  google?: {
     clientId: string;
   };
-  linkedIn: {
+  linkedIn?: {
     api_key: string;
   };
-  facebook: {
+  facebook?: {
     appId: string;
   };
 
