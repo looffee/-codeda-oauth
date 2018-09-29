@@ -4,6 +4,10 @@
   "description": "Angular module for social authorizations",
   "module": "dist/index.js",
   "main": "dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/looffee/-codeda-oauth.git"
+  },
   "scripts": {
     "build": "webpack"
   },
