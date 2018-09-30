@@ -1,11 +1,13 @@
 import { ModuleWithProviders } from '@angular/core';
 import { CanActivate } from '@angular/router';
 
+import { Config } from './src/congif';
+
 import { Observable } from 'rxjs';
 
 export class OAuthModule {
 
-  static forRoot(): ModuleWithProviders;
+  static forRoot(config: Config): ModuleWithProviders;
 
 }
 

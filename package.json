@@ -1,6 +1,6 @@
 {
   "name": "@codeda/oauth",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Angular module for social authorizations",
   "module": "dist/index.js",
   "main": "dist/index.js",
