@@ -2,6 +2,7 @@ import {
   NgModule,
   ModuleWithProviders
 } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 import { OAuthGuard } from './oauth.guard';
 import { OAuthService } from './oauth.service';
@@ -10,7 +11,11 @@ import {
   CONFIG
 } from './congif';
 
-@NgModule({})
+@NgModule({
+  imports: [
+    CommonModule
+  ]
+})
 export class OAuthModule {
 
   static forRoot(config: Config): ModuleWithProviders {
