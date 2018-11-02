@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 
+import { OAuthGuard } from './oauth.guard';
+
 import {
   Observable,
   Observer
@@ -18,6 +20,10 @@ interface UserSocialProfile {
 
 @Injectable()
 export class OAuthService {
+
+  constructor(
+    private oauthGuard: OAuthGuard
+  ) {}
 
   signInByLinkedIn(): Observable<UserSocialProfile> {
     return Observable.create((observer: Observer<UserSocialProfile>) => {
@@ -120,6 +126,10 @@ export class OAuthService {
   }
 
   private signOutByLinkedIn(): void {
+    if (this.oauthGuard.available.in === false) {
+      return;
+    }
+
     const isSignedIn: boolean = IN
       .User
       .isAuthorized();
@@ -130,6 +140,10 @@ export class OAuthService {
   }
 
   private signOutByFacebook(): void {
+    if (this.oauthGuard.available.fb === false) {
+      return;
+    }
+
     FB.getLoginStatus(response => {
       if (response.status === 'connected') {
         FB.logout(() => null);
@@ -138,6 +152,10 @@ export class OAuthService {
   }
 
   private signOutByGoogle(): void {
+    if (this.oauthGuard.available.gplus === false) {
+      return;
+    }
+
     const isSignedIn: boolean = gapi
       .auth2
       .getAuthInstance()

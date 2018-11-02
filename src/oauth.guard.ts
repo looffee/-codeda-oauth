@@ -45,6 +45,11 @@ function insertScript(
 @Injectable()
 export class OAuthGuard implements CanActivate {
 
+  public available = {
+    fb: false,
+    in: false,
+    gplus: false
+  };
   private inited = false;
 
   constructor(
@@ -81,6 +86,16 @@ export class OAuthGuard implements CanActivate {
       const script = insertScript('https://connect.facebook.net/en_US/sdk.js');
       script.element.id = 'facebook-jssdk';
 
+      script.element.onerror = () => {
+        observer.next(undefined);
+        observer.complete();
+      };
+
+      script.element.onload = () => {
+        observer.next(undefined);
+        observer.complete()
+      }
+
       window['fbAsyncInit'] = () => {
         FB.init({
           appId: this.config.facebook.appId,
@@ -91,8 +106,7 @@ export class OAuthGuard implements CanActivate {
 
         delete window['fbAsyncInit'];
 
-        observer.next(undefined);
-        observer.complete();
+        this.zone.run(() => this.available.fb = true);
       };
 
       script.insert();
@@ -103,17 +117,29 @@ export class OAuthGuard implements CanActivate {
     return Observable.create((observer: Observer<void>) => {
       const script = insertScript('https://apis.google.com/js/api.js');
 
+      script.element.onerror = () => {
+        observer.next(undefined);
+        observer.complete();
+      };
+
       script.element.onload = () => {
-        gapi.load('client', () => {
-          gapi.client.init({
-            'discoveryDocs': ['https://people.googleapis.com/$discovery/rest'],
-            'clientId': this.config.google.clientId,
-            'scope': 'profile',
-          })
-          .then(() => {
+        observer.next(undefined);
+        observer.complete();
+        gapi.load('client', {
+          callback: () => {
+            gapi.client.init({
+              'discoveryDocs': ['https://people.googleapis.com/$discovery/rest'],
+              'clientId': this.config.google.clientId,
+              'scope': 'profile',
+            })
+            .then(() => {
+              this.zone.run(() => this.available.gplus = true);
+            });
+          },
+          onerror: () => {
             observer.next(undefined);
             observer.complete();
-          });
+          }
         });
       };
 
@@ -128,11 +154,20 @@ export class OAuthGuard implements CanActivate {
         `api_key: ${this.config.linkedIn.api_key} \n onLoad: onLoadLinkedInSdk`
       );
 
+      script.element.onerror = () => {
+        observer.next(undefined);
+        observer.complete();
+      };
+
+      script.element.onload = () => {
+        observer.next(undefined);
+        observer.complete()
+      }
+
       window['onLoadLinkedInSdk'] = () => {
         delete window['onLoadLinkedInSdk'];
 
-        observer.next(undefined);
-        observer.complete();
+        this.zone.run(() => this.available.in = true);
       };
 
       script.insert();
