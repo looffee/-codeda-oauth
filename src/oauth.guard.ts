@@ -16,6 +16,10 @@ import {
   forkJoin
 } from 'rxjs';
 
+declare const gapi: any;
+declare const FB: any;
+declare const IN: any;
+
 function insertScript(
   src: string,
   innerHTML?: string
