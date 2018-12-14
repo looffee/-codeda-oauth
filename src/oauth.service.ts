@@ -7,10 +7,6 @@ import {
   Observer
 } from 'rxjs';
 
-declare const IN: any;
-declare const FB: any;
-declare const gapi: any;
-
 interface UserSocialProfile {
 
   fullName: string;
@@ -116,10 +112,6 @@ export class OAuthService {
   }
 
   logout(): void {
-    if (location.hostname === 'localhost') {
-      return;
-    }
-
     this.signOutByFacebook();
     this.signOutByGoogle();
     this.signOutByLinkedIn();

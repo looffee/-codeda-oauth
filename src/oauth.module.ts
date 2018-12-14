@@ -9,7 +9,7 @@ import { OAuthService } from './oauth.service';
 import {
   Config,
   CONFIG
-} from './congif';
+} from './config';
 
 @NgModule({
   imports: [

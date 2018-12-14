@@ -8,16 +8,13 @@ import { CanActivate } from '@angular/router';
 import {
   Config,
   CONFIG
-} from './congif';
+} from './config';
 
 import {
   Observable,
   Observer,
   forkJoin
 } from 'rxjs';
-
-declare const gapi: any;
-declare const FB: any;
 
 function insertScript(
   src: string,
@@ -58,10 +55,7 @@ export class OAuthGuard implements CanActivate {
   ) {}
 
   canActivate(): Observable<boolean> | boolean {
-    if (
-      location.hostname === 'localhost' ||
-      this.inited === true
-    ) {
+    if (this.inited === true) {
       return true;
     }
 
